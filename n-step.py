@@ -24,13 +24,13 @@ decay_rate = 0.0005
 n = 5
 
 rewards = []
-p = []
 
 for episode in range(total_episodes):
     state = env.reset()
     step = 0
     done = False
     total_rewards = 0
+    p = []
 
     while not done:
         step += 1
