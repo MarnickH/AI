@@ -1,9 +1,11 @@
 import numpy as np
 import gym
 import random
+import frozen_lake
 from percept import Percept
 
 env = gym.make("FrozenLake-v0")
+frozen_lake.set_chances(env)
 
 action_size = env.action_space.n
 state_size = env.observation_space.n
@@ -61,6 +63,9 @@ for episode in range(total_episodes):
 
 print("Score over time: " + str(sum(rewards) / total_episodes))
 print(qtable)
+
+with open('qtable-n-step.txt', 'wb') as f:
+    np.savetxt(f, qtable, fmt='%1.10f')
 
 env.reset()
 
