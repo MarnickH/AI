@@ -21,7 +21,6 @@ epsilon = 1.0
 max_epsilon = 1.0
 min_epsilon = 0.01
 decay_rate = 0.0005
-n = 5
 
 rewards = []
 
@@ -46,8 +45,8 @@ for episode in range(total_episodes):
         new_percept = Percept(state, action, new_state, reward)
         p.append(new_percept)
 
-        if len(p) >= n:
-            for percept in p[step - n:step]:
+        if done:
+            for percept in p:
                 qtable[percept.state, percept.action] = qtable[percept.state, percept.action] - learning_rate * (
                         qtable[percept.state, percept.action] - (
                         percept.reward + gamma * np.max(qtable[percept.new_state, :])))
